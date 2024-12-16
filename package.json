@@ -8,6 +8,7 @@
     "seed": "ts-node --esm src/utils/seed.ts",
     "dev2": "nodemon --exec node --loader ts-node/esm src/app.ts",
     "clean": "rimraf dist",
+    "db:generate": "npx prisma generate",
     "build": "npm run clean && tsc",
     "start": "node dist/app.js"
   },
