@@ -26,7 +26,7 @@ declare module "@fastify/jwt" {
 }
 
 server.register(cors, {
-  origin: "http://localhost:3000", // Specifica l'origine autorizzata
+  origin: process.env.FRONTEND_DOMAIN, // Specifica l'origine autorizzata
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Metodi permessi
   allowedHeaders: ["Content-Type", "Authorization"], // Headers permessi
 });
@@ -66,7 +66,7 @@ async function main() {
 
   try {
     await server.listen({ port: 4444, host: "0.0.0.0" });
-    console.log("Server ready at http://localhost:4444");
+    console.log("Server ready");
   } catch (e) {
     console.error(e);
     process.exit(1);
