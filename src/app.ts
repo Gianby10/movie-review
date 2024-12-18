@@ -26,7 +26,7 @@ declare module "@fastify/jwt" {
 }
 
 server.register(cors, {
-  origin: "http://localhost:3000", // Specifica l'origine autorizzata
+  origin: process.env.FRONTEND_DOMAIN, // Specifica l'origine autorizzata
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Metodi permessi
   allowedHeaders: ["Content-Type", "Authorization"], // Headers permessi
 });
