@@ -70,19 +70,19 @@ export async function getMoviesByCategoryId({
     where: {
       categories: {
         some: {
-          categoryId: categoryId, // Filtro per categoria specifica
+          categoryId: categoryId,
         },
       },
     },
     include: {
       categories: {
         where: {
-          categoryId: categoryId, // Assicurati che solo la categoria desiderata sia inclusa
+          categoryId: categoryId,
         },
         select: {
           category: {
             select: {
-              name: true, // Includi solo il nome della categoria
+              name: true,
             },
           },
         },

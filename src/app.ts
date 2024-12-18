@@ -66,7 +66,7 @@ async function main() {
 
   try {
     await server.listen({ port: 4444, host: "0.0.0.0" });
-    console.log("Server ready at http://localhost:4444");
+    console.log("Server ready");
   } catch (e) {
     console.error(e);
     process.exit(1);

@@ -57,10 +57,6 @@ export async function getReviewsByUserId(
   { userId }: { userId: number },
   { skip, limit }: { skip?: number; limit?: number }
 ) {
-  // const reviews = await prisma.review.findMany({
-  //   where: { userId },
-  // });
-
   const [reviews, total] = await Promise.all([
     prisma.review.findMany({
       where: { userId: Number(userId) },

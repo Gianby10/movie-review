@@ -30,6 +30,19 @@ export async function createReviewHandler(
       .send({ error: `Movie with ID ${movieId} not found` });
   }
 
+  const existingReviewFromSameAuthor = await prisma.review.findFirst({
+    where: {
+      userId: request.user.id,
+      movieId: movieId,
+    },
+  });
+
+  if (existingReviewFromSameAuthor) {
+    return reply.send({
+      error: `You have already reviewed this film, please edit or delete your review.`,
+    });
+  }
+
   const review = await createReview({
     ...request.body,
     userId: request.user.id,
@@ -44,7 +57,7 @@ export async function createReviewHandler(
   await prisma.movie.update({
     where: { id: movieId },
     data: {
-      rating: parseFloat(averageRating._avg.rating?.toFixed(1)!) || 0, // Valore di default se non ci sono recensioni
+      rating: parseFloat(averageRating._avg.rating?.toFixed(1)!) || 0,
     },
   });
 
@@ -171,7 +184,7 @@ export async function deleteReviewHandler(
   await prisma.movie.update({
     where: { id: movieId },
     data: {
-      rating: parseFloat(averageRating._avg.rating?.toFixed(1)!) || 0, // Valore di default se non ci sono recensioni
+      rating: parseFloat(averageRating._avg.rating?.toFixed(1)!) || 0,
     },
   });
 
@@ -219,7 +232,7 @@ export async function editReviewHandler(
   await prisma.movie.update({
     where: { id: movieId },
     data: {
-      rating: parseFloat(averageRating._avg.rating?.toFixed(1)!) || 0, // Valore di default se non ci sono recensioni
+      rating: parseFloat(averageRating._avg.rating?.toFixed(1)!) || 0,
     },
   });
 
